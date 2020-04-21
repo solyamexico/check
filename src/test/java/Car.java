@@ -1,11 +1,5 @@
-import org.testng.annotations.Test;
-
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.testng.Assert.assertEquals;
 
@@ -21,6 +15,10 @@ public class Car {
         this.model = model;
         this.year = year;
         this.description = description;
+    }
+
+    public Car() {
+
     }
 
     public Integer getPrice() {
@@ -56,11 +54,22 @@ public class Car {
     }
 
     @Override
-    public boolean equals(Object o){
-        if(getClass() == o.getClass()){
+    public boolean equals(Object o) {
+        if (getClass() == o.getClass()) {
             return true;
+        } else {
+            return false;
         }
-        else{
-            return false;}
+    }
+
+    @Override
+    public String toString() {
+        return "Price: '" + this.getPrice() + "', Model: '" + this.getModel() + "' , Year: '" + this.getYear() + "' ,Description: '" + this.getDescription() + "'";
+    }
+
+    public List<Car> getIndCar(List<Car> carsYear, int year) {
+        List<Car> yearCar = carsYear.stream().filter(car -> car.getYear().equals(year))
+                .collect(Collectors.toList());
+        return yearCar;
     }
 }

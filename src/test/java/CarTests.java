@@ -9,8 +9,9 @@ import java.util.stream.Stream;
 import static org.testng.Assert.assertEquals;
 
 public class CarTests {
+    private Car carEntity;
 
-    @Test
+    //@Test
     public void test() {
         //rewrite using java 8
         Map<String, Integer> modelToPrice = new HashMap<>();
@@ -67,5 +68,31 @@ public class CarTests {
         assertEquals(cheapestCar, cheapestCarJava8);
         assertEquals(expensiveCar, expensiveCarJava8);
         assertEquals(modelToPrice, modelToPriceJava8);
+    }
+
+    @Test
+    public void test2() {
+        List<Car> cars = Arrays.asList(
+                new Car(10000, "megan", 2014, ""),
+                new Car(10500, "mazda", 2015, ""),
+                new Car(2000, "kia", 2008, ""),
+                new Car(13000, "a5", 2012, ""),
+                new Car(10000, "megan", 2014, ""),
+                new Car(10500, "mazda", 2014, ""),
+                new Car(2000, "niva", 2008, ""),
+                new Car(13000, "a4", 2008, "")
+        );
+
+        int yearVal = 2014;
+
+        carEntity = new Car();
+        carEntity.getIndCar(cars, yearVal);
+
+        Map<Integer, List<Car>> mapCar =
+                cars.stream().collect(Collectors.toMap(k -> yearVal, e -> e.getIndCar(cars, yearVal), (oldValue, newValue) -> newValue
+                ));
+
+        mapCar.forEach((k,e)->System.out.println("Year : " + k + " Car : " + e));
+
     }
 }
