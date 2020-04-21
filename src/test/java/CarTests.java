@@ -85,14 +85,18 @@ public class CarTests {
 
         int yearVal = 2014;
 
-        carEntity = new Car();
-        carEntity.getIndCar(cars, yearVal);
+        getIndCar(cars, yearVal);
 
         Map<Integer, List<Car>> mapCar =
-                cars.stream().collect(Collectors.toMap(k -> yearVal, e -> e.getIndCar(cars, yearVal), (oldValue, newValue) -> newValue
+                cars.stream().collect(Collectors.toMap(k -> yearVal, e -> getIndCar(cars, yearVal), (oldValue, newValue) -> newValue
                 ));
 
         mapCar.forEach((k,e)->System.out.println("Year : " + k + " Car : " + e));
 
+    }
+    public List<Car> getIndCar(List<Car> carsYear, int year) {
+        List<Car> yearCar = carsYear.stream().filter(car -> car.getYear().equals(year))
+                .collect(Collectors.toList());
+        return yearCar;
     }
 }

@@ -66,10 +66,4 @@ public class Car {
     public String toString() {
         return "Price: '" + this.getPrice() + "', Model: '" + this.getModel() + "' , Year: '" + this.getYear() + "' ,Description: '" + this.getDescription() + "'";
     }
-
-    public List<Car> getIndCar(List<Car> carsYear, int year) {
-        List<Car> yearCar = carsYear.stream().filter(car -> car.getYear().equals(year))
-                .collect(Collectors.toList());
-        return yearCar;
-    }
 }
